@@ -1,0 +1,25 @@
+package: github.com/cloudposse/openvpn-api
+homepage: https://github.com/cloudposse/openvpn-api
+license: Apache License 2.0
+owners:
+- name: Cloud Posse
+  email: hello@cloudposse.com
+  homepage: http://cloudposse.com
+import:
+- package: github.com/gin-gonic/gin
+  version: v1.1.4
+- package: github.com/spf13/pflag
+  version: 5ccb023bc27df288a957c5e994cd44fd19619465
+- package: github.com/spf13/cobra
+  version: 9495bc009a56819bdb0ddbc1a373e29c140bc674
+  subpackages:
+  - cobra
+- package: github.com/Sirupsen/logrus
+  version: v0.11.0
+testImport:
+- package: github.com/onsi/ginkgo
+  version: 00054c0bb96fc880d4e0be1b90937fad438c5290
+  subpackages:
+  - ginkgo
+- package: github.com/onsi/gomega
+  version: f1f0f388b31eca4e2cbe7a6dd8a3a1dfddda5b1c
