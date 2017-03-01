@@ -46,11 +46,6 @@ func GetClientConfig(name string) (result string, err error) {
 	return
 }
 
-func RevokeUser(name string) error {
-	// easyrsa revoke {name}
-	return nil
-}
-
 func validCertsExits(name string) bool {
 	logger := log.WithFields(log.Fields{"class": "openvpn", "method": "validCertsExits"})
 
