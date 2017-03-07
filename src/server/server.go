@@ -13,7 +13,7 @@ import (
 func Run(cfg config.Config) {
 
 	router := gin.Default()
-	router.Use(validation.ValidatePathParam("name", validator.RegExp{"^[a-zA-Z0-9]*$"}))
+	router.Use(validation.ValidatePathParam("name", validator.RegExp{"^[a-zA-Z0-9]+$"}))
 	router.GET("/user/:name", func(c *gin.Context) {
 		name := c.Params.ByName("name")
 

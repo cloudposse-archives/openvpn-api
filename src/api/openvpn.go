@@ -78,15 +78,15 @@ func validCertsExits(name string) bool {
 func cleanCertsFor(name string) (err error) {
 	err = nil
 
-	if err = deleteFileSafety("/etc/openvpn/pki/issued/" + name + ".crt"); err != nil {
+	if err = deleteFileSafely("/etc/openvpn/pki/issued/" + name + ".crt"); err != nil {
 		return
 	}
 
-	if err = deleteFileSafety("/etc/openvpn/pki/reqs/" + name + ".req"); err != nil {
+	if err = deleteFileSafely("/etc/openvpn/pki/reqs/" + name + ".req"); err != nil {
 		return
 	}
 
-	if err = deleteFileSafety("/etc/openvpn/pki/private/" + name + ".key"); err != nil {
+	if err = deleteFileSafely("/etc/openvpn/pki/private/" + name + ".key"); err != nil {
 		return
 	}
 
@@ -94,7 +94,7 @@ func cleanCertsFor(name string) (err error) {
 }
 
 // Delete file if exists
-func deleteFileSafety(file string) (err error) {
+func deleteFileSafely(file string) (err error) {
 	err = nil
 	if _, e := os.Stat(file); os.IsNotExist(e) {
 		return
