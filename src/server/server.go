@@ -5,15 +5,17 @@ import (
 	"github.com/cloudposse/openvpn-api/src/config"
 	log "github.com/Sirupsen/logrus"
 	"github.com/cloudposse/openvpn-api/src/api"
+	"github.com/dogenzaka/gin-tools/validation"
+	"github.com/dogenzaka/gin-tools/validation/validator"
 )
 
 // Run - start http server
 func Run(cfg config.Config) {
 
 	router := gin.Default()
-
+	router.Use(validation.ValidatePathParam("name", validator.RegExp{"^[a-zA-Z0-9]*$"}))
 	router.GET("/user/:name", func(c *gin.Context) {
-		name := c.Param("name")
+		name := c.Params.ByName("name")
 
 		logger := log.WithFields(log.Fields{"class": "RootCmd", "method": "RunE"})
 

@@ -14,6 +14,10 @@ import:
   version: 9495bc009a56819bdb0ddbc1a373e29c140bc674
   subpackages:
   - cobra
+- package: github.com/dogenzaka/gin-tools
+  version: 6e1a4a87377299920e5eb48c86b82ceb713a79a1
+  subpackages:
+  - validation
 - package: github.com/Sirupsen/logrus
   version: v0.11.0
 testImport:

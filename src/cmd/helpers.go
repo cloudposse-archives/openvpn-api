@@ -39,20 +39,3 @@ func createCmdFlags(cmd *cobra.Command, f flag) {
 	}
 	viper.BindPFlag(f.option, cmd.Flags().Lookup(f.flag()))
 }
-
-func fixStringSlice(s string) []string {
-	result := []string{}
-	if s != "" {
-		result = strings.Split(s, ",")
-	}
-	return result
-}
-
-func mask(source string) string {
-	length := len(source)
-	shown := length / 8
-	if length <= shown*2 {
-		return strings.Repeat("*", length)
-	}
-	return source[:shown] + strings.Repeat("*", length-shown*2) + source[length-shown:length]
-}

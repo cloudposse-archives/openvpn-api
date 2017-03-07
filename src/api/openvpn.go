@@ -8,6 +8,8 @@ import (
 	log "github.com/Sirupsen/logrus"
 )
 
+// EnsureUserCerts - Ensure that user have valid certificates.
+//                   If user certs expired or non exists - create them
 func EnsureUserCerts(name string) (err error) {
 	err = nil
 	logger := log.WithFields(log.Fields{"class": "openvpn", "method": "EnsureUserCerts"})
@@ -26,6 +28,8 @@ func EnsureUserCerts(name string) (err error) {
 	return
 }
 
+// GetClientConfig - Regenerate all clients configs
+//                   Return client config for user {name}
 func GetClientConfig(name string) (result string, err error) {
 	err = nil
 	result = ""
@@ -46,6 +50,7 @@ func GetClientConfig(name string) (result string, err error) {
 	return
 }
 
+// Check if user certificate exists and it is not expired
 func validCertsExits(name string) bool {
 	logger := log.WithFields(log.Fields{"class": "openvpn", "method": "validCertsExits"})
 
@@ -69,6 +74,7 @@ func validCertsExits(name string) bool {
 	return false
 }
 
+// Remove user certificates
 func cleanCertsFor(name string) (err error) {
 	err = nil
 
@@ -87,6 +93,7 @@ func cleanCertsFor(name string) (err error) {
 	return
 }
 
+// Delete file if exists
 func deleteFileSafety(file string) (err error) {
 	err = nil
 	if _, e := os.Stat(file); os.IsNotExist(e) {
@@ -101,11 +108,13 @@ func deleteFileSafety(file string) (err error) {
 
 }
 
+// Generate certificates for user {user}
 func generateCertsFor(user string) error {
 	cmd := exec.Command("easyrsa", "build-client-full", user, "nopass")
 	return cmd.Run()
 }
 
+// Recreate all users clients configs
 func recreateAllClientConfigs() error {
 	cmd := exec.Command("ovpn_getclient_all")
 	return cmd.Run()

@@ -25,4 +25,6 @@ _testmain.go
 
 vendor
 .glide
-
+release
+.build-harness
+build-harness

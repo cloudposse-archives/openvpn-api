@@ -19,9 +19,9 @@ var flags = []flag{
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "openvpn-api",
-	Short: "Use Openvpn API to create users and fetch predefined openvpn configs",
+	Short: "Use OpenVPN API to create users and fetch predefined openvpn configs",
 	Long: `
-Use Openvpn API to create users and fetch predefined openvpn configs.
+Use OpenVPN API to create users and fetch predefined openvpn configs.
 `,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		logger := log.WithFields(log.Fields{"class": "RootCmd", "method": "RunE"})

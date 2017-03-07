@@ -1,6 +1,10 @@
-hash: 8eeab27ac37a4cb8b22b0eccb3257ede920e19ef4519401912a53dc1c3b5ad83
-updated: 2017-03-01T12:14:29.61846012Z
+hash: f735daa06e4e051530576730ed38bff886e8d0ca3b430d58b7d2ea7d88b7efb7
+updated: 2017-03-07T19:50:00.945228079+06:00
 imports:
+- name: github.com/dogenzaka/gin-tools
+  version: 6e1a4a87377299920e5eb48c86b82ceb713a79a1
+  subpackages:
+  - validation
 - name: github.com/fsnotify/fsnotify
   version: fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197
 - name: github.com/gin-gonic/gin
