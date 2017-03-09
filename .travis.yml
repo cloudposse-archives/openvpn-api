@@ -1,0 +1,33 @@
+sudo: required
+language: go
+go:
+  - 1.7.x
+addons:
+  apt:
+    packages:
+    - git
+    - make
+    - curl
+
+env:
+  - APP=openvpn-api
+
+install:
+- make init
+- make go:deps-build
+- make go:deps-dev
+
+script:
+- make go:deps
+- make go:test
+- make go:lint
+- make go:build-all
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file_glob: true
+  file: "release/*"
+  skip_cleanup: true
+  on:
+    tags: true

@@ -22,3 +22,9 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+vendor
+.glide
+release
+.build-harness
+build-harness
