@@ -6,7 +6,6 @@ import (
 	"os/exec"
 	"strings"
 	log "github.com/Sirupsen/logrus"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/logger"
 )
 
 // EnsureUserCerts - Ensure that user have valid certificates.
