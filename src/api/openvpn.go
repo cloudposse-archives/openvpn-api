@@ -82,18 +82,23 @@ func cleanCertsFor(name string) (err error) {
 
 	err = nil
 
+	if err = updateCADatabase(); err != nil {
+		logger.Errorf("Update database failed")
+		return
+	}
+
 	if err = deleteFileSafely("/etc/openvpn/pki/issued/" + name + ".crt"); err != nil {
 		logger.Errorf("Could not remove /etc/openvpn/pki/issued/%v.crt", name)
 		return
 	}
 
 	if err = deleteFileSafely("/etc/openvpn/pki/reqs/" + name + ".req"); err != nil {
-		logger.Errorf("Could not remove /etc/openvpn/pki/reqs/%v.crt", name)
+		logger.Errorf("Could not remove /etc/openvpn/pki/reqs/%v.req", name)
 		return
 	}
 
 	if err = deleteFileSafely("/etc/openvpn/pki/private/" + name + ".key"); err != nil {
-		logger.Errorf("Could not remove /etc/openvpn/pki/private/%v.crt", name)
+		logger.Errorf("Could not remove /etc/openvpn/pki/private/%v.key", name)
 		return
 	}
 
@@ -124,5 +129,11 @@ func generateCertsFor(user string) error {
 // Recreate all users clients configs
 func recreateAllClientConfigs() error {
 	cmd := exec.Command("ovpn_getclient_all")
+	return cmd.Run()
+}
+
+// Update CA database
+func updateCADatabase() error {
+	cmd := exec.Command("easyrsa", "update-db")
 	return cmd.Run()
 }

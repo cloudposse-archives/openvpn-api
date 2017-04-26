@@ -23,6 +23,7 @@ func Run(cfg config.Config) {
 		if err != nil {
 			logger.Errorf("Ensure user certs failed: %v", err.Error())
 			c.String(404, "Can not get user certs")
+			return
 		}
 
 		clientConf, err := api.GetClientConfig(name)
