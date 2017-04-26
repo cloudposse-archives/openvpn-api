@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"strings"
 	log "github.com/Sirupsen/logrus"
+	"github.com/grafana/grafana/pkg/cmd/grafana-cli/logger"
 )
 
 // EnsureUserCerts - Ensure that user have valid certificates.
@@ -14,13 +15,15 @@ func EnsureUserCerts(name string) (err error) {
 	err = nil
 	logger := log.WithFields(log.Fields{"class": "openvpn", "method": "EnsureUserCerts"})
 	if ! validCertsExits(name) {
-		logger.Infof("Certificates from %v nof found", name)
+		logger.Infof("Certificates from %v not found", name)
 		err = cleanCertsFor(name)
 		if err != nil {
+			logger.Errorf("Could not clean old certificates for %v", name)
 			return
 		}
 		err = generateCertsFor(name)
 		if err != nil {
+			logger.Errorf("Could not generate new certificates for %v", name)
 			return
 		}
 	}
@@ -76,17 +79,22 @@ func validCertsExits(name string) bool {
 
 // Remove user certificates
 func cleanCertsFor(name string) (err error) {
+	logger := log.WithFields(log.Fields{"class": "openvpn", "method": "cleanCertsFor"})
+
 	err = nil
 
 	if err = deleteFileSafely("/etc/openvpn/pki/issued/" + name + ".crt"); err != nil {
+		logger.Errorf("Could not remove /etc/openvpn/pki/issued/%v.crt", name)
 		return
 	}
 
 	if err = deleteFileSafely("/etc/openvpn/pki/reqs/" + name + ".req"); err != nil {
+		logger.Errorf("Could not remove /etc/openvpn/pki/reqs/%v.crt", name)
 		return
 	}
 
 	if err = deleteFileSafely("/etc/openvpn/pki/private/" + name + ".key"); err != nil {
+		logger.Errorf("Could not remove /etc/openvpn/pki/private/%v.crt", name)
 		return
 	}
 
